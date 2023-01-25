@@ -9,6 +9,7 @@ app.get('/', (req, res)=>{
       message:'pong'
   })
 
+  
   setTimeout(function(){
       axios.get('http://localhost:5372/')
       .then(response => {
@@ -21,6 +22,16 @@ app.get('/', (req, res)=>{
 
 })
 
+axios.post('http://localhost:8083/', {
+  serveur: 1,
+  port: 4567
+})
+.then(function (response) {
+  console.log(response);
+})
+.catch(function (error) {
+  console.log(error);
+});
 
 app.listen(port, () => {
   console.log('Exemple Ok')

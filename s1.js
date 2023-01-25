@@ -24,10 +24,26 @@ app.get('/', (req, res)=>{
 
 
 
+
 app.listen(port, () => {
   console.log("exemple")
   axios.get('http://localhost:4567/')
   .then(response =>{
       console.log(response.data)
   })
+})
+
+
+axios.post('http://localhost:8083/', {
+  port: 4567
+})
+.then(function (response) {
+  console.log(response);
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+app.listen(port, () => {
+  console.log('Exemple Ok')
 })
