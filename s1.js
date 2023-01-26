@@ -3,6 +3,22 @@ const request = require("request");
 const axios = require("axios");
 const app = express();
 const port = 5372;
+const registry = process.env.REGISTRY || 'http://localhost:8080'
+const address = process.env.ADDRESS || 'http://localhost'
+let otherSErver;
+
+
+app.use(express.json());
+axios.post(registry, {
+  serveur : address.port
+})
+.then(function (response) {
+  console.log(response);
+})
+.catch(function (error) {
+  console.log(error);
+});
+
 
 
 app.get('/', (req, res)=>{
@@ -10,6 +26,8 @@ app.get('/', (req, res)=>{
       status: 200,
       message:'ping'
   })
+
+axios.get(registry)
 
   setTimeout(function(){
       axios.get('http://localhost:4567/')
@@ -33,16 +51,6 @@ app.listen(port, () => {
   })
 })
 
-
-axios.post('http://localhost:8083/', {
-  port: 4567
-})
-.then(function (response) {
-  console.log(response);
-})
-.catch(function (error) {
-  console.log(error);
-});
 
 app.listen(port, () => {
   console.log('Exemple Ok')
